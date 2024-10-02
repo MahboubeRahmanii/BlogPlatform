@@ -1,4 +1,5 @@
 ﻿using BlogPlatform.Features.Comments;
+using BlogPlatform.Features.Rates;
 using BlogPlatform.Features.Users;
 
 namespace BlogPlatform.Features.Posts
@@ -17,5 +18,6 @@ namespace BlogPlatform.Features.Posts
 
         public List<Comment> Comments { get; set; } = new();
         public List<PostVersion> PostVersions { get; set; } = new();
+        public List<Rate> Rates { get; set; } = new();
     }
 }
