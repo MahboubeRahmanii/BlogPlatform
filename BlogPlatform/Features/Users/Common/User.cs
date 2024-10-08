@@ -2,7 +2,7 @@
 using BlogPlatform.Features.Posts;
 using BlogPlatform.Features.Rates;
 
-namespace BlogPlatform.Features.Users
+namespace BlogPlatform.Features.Users.Common
 {
     public class User
     {

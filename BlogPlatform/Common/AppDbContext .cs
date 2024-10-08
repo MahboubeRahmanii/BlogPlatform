@@ -1,13 +1,17 @@
 ﻿using BlogPlatform.Features.Comments;
 using BlogPlatform.Features.Posts;
 using BlogPlatform.Features.Rates;
-using BlogPlatform.Features.Users;
+using BlogPlatform.Features.Users.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogPlatform.Common
 {
     public class AppDbContext : DbContext
     {
+        public AppDbContext(DbContextOptions<AppDbContext> dbContextOptions) : base(dbContextOptions)
+        {
+
+        }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<User> Users { get; set; }
