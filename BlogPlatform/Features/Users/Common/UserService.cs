@@ -39,7 +39,7 @@ namespace BlogPlatform.Features.Users.Common
 
         public async Task EditUserAsync(int userId, EditUserRequest request, CancellationToken cancellationToken)
         {
-            var user = await _context.Users.FindAsync(new object[] { userId }, cancellationToken);
+            var user = await _context.Users.FindAsync(userId , cancellationToken);
             if (user != null)
             {
                 user.UserName = request.userName;

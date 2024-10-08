@@ -12,7 +12,9 @@ namespace BlogPlatform.Features.Users
         {
             serviceCollection.AddScoped<UserService>();
             serviceCollection.AddValidatorsFromAssemblyContaining<AddUserRequest>();
+            serviceCollection.AddValidatorsFromAssemblyContaining<EditUserRequest>();
             serviceCollection.AddScoped<IValidator<AddUserRequest>,AddUserRequestValidator>();
+            serviceCollection.AddScoped<IValidator<EditUserRequest>,EditUserRequestValidator>();
         }
     }
 }

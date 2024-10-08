@@ -28,7 +28,7 @@ namespace BlogPlatform.Features.Users
             });
 
             app.MapPut("/edit/{userId:int}",
-            async (int userId, [FromBody] EditUserRequest request, UserService _service, CancellationToken cancellationToken) =>
+            async ([FromBody] EditUserRequest request, int userId, UserService _service, CancellationToken cancellationToken) =>
             {
                 await _service.EditUserAsync(userId, request, cancellationToken);
                 return Results.Ok("User edited successfully!");
