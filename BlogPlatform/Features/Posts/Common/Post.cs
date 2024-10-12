@@ -1,8 +1,8 @@
 ﻿using BlogPlatform.Features.Comments;
 using BlogPlatform.Features.Rates;
-using BlogPlatform.Features.Users;
+using BlogPlatform.Features.Users.Common;
 
-namespace BlogPlatform.Features.Posts
+namespace BlogPlatform.Features.Posts.Common
 {
     public class Post
     {

@@ -1,5 +1,5 @@
 ﻿using BlogPlatform.Features.Comments;
-using BlogPlatform.Features.Posts;
+using BlogPlatform.Features.Posts.Common;
 using BlogPlatform.Features.Rates;
 using BlogPlatform.Features.Users.Common;
 using Microsoft.EntityFrameworkCore;
