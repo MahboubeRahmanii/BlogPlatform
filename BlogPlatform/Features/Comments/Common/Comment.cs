@@ -1,7 +1,7 @@
-﻿using BlogPlatform.Features.Posts;
-using BlogPlatform.Features.Users;
+﻿using BlogPlatform.Features.Posts.Common;
+using BlogPlatform.Features.Users.Common;
 
-namespace BlogPlatform.Features.Comments
+namespace BlogPlatform.Features.Comments.Common
 {
     public class Comment
     {

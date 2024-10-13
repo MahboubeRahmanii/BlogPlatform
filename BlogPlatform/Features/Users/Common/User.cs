@@ -1,4 +1,4 @@
-﻿using BlogPlatform.Features.Comments;
+﻿using BlogPlatform.Features.Comments.Common;
 using BlogPlatform.Features.Posts.Common;
 using BlogPlatform.Features.Rates;
 

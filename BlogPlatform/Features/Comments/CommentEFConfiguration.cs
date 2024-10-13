@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using BlogPlatform.Features.Comments.Common;
 
 namespace BlogPlatform.Features.Comments
 {
