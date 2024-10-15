@@ -21,10 +21,6 @@ namespace BlogPlatform.Features.Rates
             builder.Property(u => u.CreatedAt)
                    .IsRequired();
 
-            builder.HasOne(r => r.Post)
-                   .WithMany(p => p.Rates)
-                   .HasForeignKey(r => r.PostId);
-
             builder.HasOne(r => r.User)
                    .WithMany(u => u.Rates)
                    .HasForeignKey(r => r.UserId);

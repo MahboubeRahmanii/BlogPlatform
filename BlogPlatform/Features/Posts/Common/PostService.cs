@@ -50,18 +50,22 @@ namespace BlogPlatform.Features.Posts.Common
 
         public async Task<List<Post>> GetAllPostsAsync(CancellationToken cancellationToken)
         {
-            return await _context.Posts.ToListAsync(cancellationToken);
+            return await _context.Posts
+                .Include(p => p.Comments)
+                .Include(p => p.Rates)
+                .ToListAsync(cancellationToken);
         }
 
         public async Task<Post?> GetPostByPostIdAsync(int postId, CancellationToken cancellationToken)
         {
-            return await _context.Posts
+            return await _context.Posts.Include(p => p.Comments)
+                                 .Include(p => p.Rates)
                                  .FirstOrDefaultAsync(p => p.Id == postId, cancellationToken);
         }
 
         public async Task<List<Post>> GetPostsByUserIdAsync(int userId, CancellationToken cancellationToken)
         {
-            return await _context.Posts.Where(p => p.UserId == userId).ToListAsync();
+            return await _context.Posts.Include(p => p.Comments).Include(p => p.Rates).Where(p => p.UserId == userId).ToListAsync();
         }
     }
 }

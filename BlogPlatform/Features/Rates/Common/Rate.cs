@@ -1,5 +1,5 @@
-﻿using BlogPlatform.Features.Posts;
-using BlogPlatform.Features.Users;
+﻿using BlogPlatform.Features.Posts.Common;
+using BlogPlatform.Features.Users.Common;
 
 namespace BlogPlatform.Features.Rates
 {
@@ -12,6 +12,5 @@ namespace BlogPlatform.Features.Rates
         public int UserId { get; set; }         
         public int PostId { get; set; }
         public User User { get; set; } = default!;
-        public Post Post { get; set; } = default!;
     }
 }

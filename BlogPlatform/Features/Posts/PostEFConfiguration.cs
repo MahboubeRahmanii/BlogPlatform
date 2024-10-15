@@ -25,21 +25,10 @@ namespace BlogPlatform.Features.Posts
             builder.Property(p => p.CreatedAt)
                    .IsRequired();
 
-            builder.HasMany(p => p.Comments)
-                   .WithOne(c => c.Post)
-                   .HasForeignKey(c => c.PostId);
-
             builder.HasMany(p => p.PostVersions)
                    .WithOne(pv => pv.Post)
                    .HasForeignKey(pv => pv.PostId);
 
-            builder.HasMany(p => p.Rates)
-                   .WithOne(r => r.Post)
-                   .HasForeignKey(r => r.PostId);
-
-            builder.HasOne(p => p.User)
-                   .WithMany(u => u.Posts)
-                   .HasForeignKey(p => p.UserId);
         }
     }
 }

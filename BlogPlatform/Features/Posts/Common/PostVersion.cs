@@ -1,15 +1,12 @@
-﻿using BlogPlatform.Features.Users.Common;
-
-namespace BlogPlatform.Features.Comments.Common
+﻿namespace BlogPlatform.Features.Posts.Common
 {
-    public class Comment
+    public class PostVersion
     {
         public int Id { get; set; }
         public string Content { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public int PostId { get; set; }
-        public int UserId { get; set; }
-        public User User { get; set; } = default!;
+        public Post Post { get; set; } = default!;
     }
 }

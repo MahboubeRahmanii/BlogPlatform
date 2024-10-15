@@ -22,8 +22,15 @@ namespace BlogPlatform.Features.Comments.Common
                 CreatedAt = DateTime.UtcNow
             };
 
-            await _context.Comments.AddAsync(comment, cancellationToken);
-            await _context.SaveChangesAsync(cancellationToken);
+            var post = await _context.Posts.Include(p => p.Comments)
+                .FirstOrDefaultAsync(p => p.Id == request.PostId, cancellationToken);
+
+            if (post != null)
+            {
+                post.Comments.Add(comment);
+                await _context.Comments.AddAsync(comment, cancellationToken);
+                await _context.SaveChangesAsync(cancellationToken);
+            }
         }
 
         public async Task DeleteCommentAsync(int commentId, CancellationToken cancellationToken)

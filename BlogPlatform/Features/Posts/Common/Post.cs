@@ -1,6 +1,5 @@
 ﻿using BlogPlatform.Features.Comments.Common;
 using BlogPlatform.Features.Rates;
-using BlogPlatform.Features.Users.Common;
 
 namespace BlogPlatform.Features.Posts.Common
 {
@@ -14,7 +13,6 @@ namespace BlogPlatform.Features.Posts.Common
         public bool IsPublished { get; set; } = false;
 
         public int UserId { get; set; }
-        public User User { get; set; } = default!;
 
         public List<Comment> Comments { get; set; } = new();
         public List<PostVersion> PostVersions { get; set; } = new();
