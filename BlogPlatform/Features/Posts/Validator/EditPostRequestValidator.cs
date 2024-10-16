@@ -14,9 +14,6 @@ namespace BlogPlatform.Features.Posts.Validator
             RuleFor(x => x.Content)
                 .NotEmpty().WithMessage("Content is required")
                 .MaximumLength(1000).WithMessage("Content cannot exceed 1000 characters");
-
-            RuleFor(x => x.UserId)
-                .NotEmpty().WithMessage("UserId is required");
         }
     }
 }

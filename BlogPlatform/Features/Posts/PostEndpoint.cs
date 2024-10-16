@@ -54,6 +54,13 @@ namespace BlogPlatform.Features.Posts
                 var post = await _service.GetPostsByUserIdAsync(userId, cancellationToken);
                 return post is not null ? Results.Ok(post) : Results.NotFound("Post not found");
             });
+
+            postsGroup.MapGet("/getVersionsOfPost/{postId}",
+            async (int postId, PostService _service, CancellationToken cancellationToken) =>
+            {
+                var versions = await _service.GetVersionsOfPostAsync(postId, cancellationToken);
+                return versions is not null ? Results.Ok(versions) : Results.NotFound("versions not found");
+            });
         }
     }
 }

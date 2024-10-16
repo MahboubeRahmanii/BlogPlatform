@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using BlogPlatform.Features.Posts.Common;
 
 namespace BlogPlatform.Features.Posts
 {
@@ -15,6 +16,9 @@ namespace BlogPlatform.Features.Posts
                    .ValueGeneratedOnAdd();
 
             builder.Property(pv => pv.Content)
+                   .IsRequired();
+
+            builder.Property(pv => pv.Title)
                    .IsRequired();
 
             builder.Property(pv => pv.CreatedAt)
