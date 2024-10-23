@@ -8,6 +8,7 @@ namespace BlogPlatform.Features.Notifications
         public void AddServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<NotificationService>();
+            serviceCollection.AddSignalR();
         }
     }
 }

@@ -1,3 +1,8 @@
+using BlogPlatform.Common.Extensions;
+using BlogPlatform.Features.Notifications;
+using Carter;
+using ServiceCollector.Core;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,7 +10,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.ConfigureDbContexts(builder.Configuration);
 builder.Services.AddSwaggerGen();
+builder.Services.AddCarter();
+builder.Services.AddServiceDiscovery();
+
 
 var app = builder.Build();
 
@@ -21,5 +30,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapCarter();
+app.MapHub<NotificationHub>("/notificationHub");
 
 app.Run();

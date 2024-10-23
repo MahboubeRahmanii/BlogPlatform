@@ -1,6 +1,8 @@
 ﻿using BlogPlatform.Common;
 using BlogPlatform.Features.Comments.Parameters;
+using BlogPlatform.Features.Notifications;
 using BlogPlatform.Features.Notifications.Common;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogPlatform.Features.Comments.Common
@@ -8,9 +10,12 @@ namespace BlogPlatform.Features.Comments.Common
     public class CommentService
     {
         private readonly AppDbContext _context;
-        public CommentService(AppDbContext context)
+        private readonly IHubContext<NotificationHub> _hubContext;
+
+        public CommentService(AppDbContext context, IHubContext<NotificationHub> hubContext)
         {
             _context = context;
+            _hubContext = hubContext;
         }
 
         public async Task AddCommentAsync(AddCommentRequest request, CancellationToken cancellationToken)
@@ -26,7 +31,7 @@ namespace BlogPlatform.Features.Comments.Common
             var post = await _context.Posts.Include(p => p.Comments)
                 .FirstOrDefaultAsync(p => p.Id == request.PostId, cancellationToken);
 
-            if (post != null && post.UserId != request.UserId)  
+            if (post != null && post.UserId != request.UserId)
             {
                 var notification = new Notification
                 {
@@ -36,6 +41,7 @@ namespace BlogPlatform.Features.Comments.Common
                 };
 
                 await _context.Notifications.AddAsync(notification, cancellationToken);
+                await _hubContext.Clients.User(post.UserId.ToString()).SendAsync("ReceiveNotification", notification.Message);
                 post.Comments.Add(comment);
                 await _context.Comments.AddAsync(comment, cancellationToken);
                 await _context.SaveChangesAsync(cancellationToken);
