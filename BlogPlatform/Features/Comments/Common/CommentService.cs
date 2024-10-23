@@ -1,5 +1,6 @@
 ﻿using BlogPlatform.Common;
 using BlogPlatform.Features.Comments.Parameters;
+using BlogPlatform.Features.Notifications.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogPlatform.Features.Comments.Common
@@ -25,8 +26,16 @@ namespace BlogPlatform.Features.Comments.Common
             var post = await _context.Posts.Include(p => p.Comments)
                 .FirstOrDefaultAsync(p => p.Id == request.PostId, cancellationToken);
 
-            if (post != null)
+            if (post != null && post.UserId != request.UserId)  
             {
+                var notification = new Notification
+                {
+                    UserId = post.UserId,
+                    Message = $"User {request.UserId} commented on your post '{post.Title}'",
+                    CreatedAt = DateTime.UtcNow
+                };
+
+                await _context.Notifications.AddAsync(notification, cancellationToken);
                 post.Comments.Add(comment);
                 await _context.Comments.AddAsync(comment, cancellationToken);
                 await _context.SaveChangesAsync(cancellationToken);

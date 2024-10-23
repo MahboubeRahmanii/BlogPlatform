@@ -2,6 +2,7 @@
 using BlogPlatform.Features.Posts.Common;
 using BlogPlatform.Features.Rates;
 using BlogPlatform.Features.Users.Common;
+using BlogPlatform.Features.Notifications.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogPlatform.Common
@@ -17,10 +18,16 @@ namespace BlogPlatform.Common
         public DbSet<User> Users { get; set; }
         public DbSet<PostVersion> PostVersions { get; set; }
         public DbSet<Rate> Rates{ get; set; }
+        public DbSet<Notification> Notifications{ get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source=blogplatform.db");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BlogPlatform.Common;
+using BlogPlatform.Features.Notifications.Common;
 using BlogPlatform.Features.Rates.Parameters;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,8 +26,16 @@ namespace BlogPlatform.Features.Rates.Common
             var post = await _context.Posts.Include(p => p.Rates)
                 .FirstOrDefaultAsync(p => p.Id == request.PostId, cancellationToken);
 
-            if (post != null)
+            if (post != null && post.UserId != request.UserId)  
             {
+                var notification = new Notification
+                {
+                    UserId = post.UserId,
+                    Message = $"User {request.UserId} rated your post '{post.Title}'",
+                    CreatedAt = DateTime.UtcNow
+                };
+
+                await _context.Notifications.AddAsync(notification, cancellationToken);
                 post.Rates.Add(rate);
                 await _context.Rates.AddAsync(rate, cancellationToken);
                 await _context.SaveChangesAsync(cancellationToken);
