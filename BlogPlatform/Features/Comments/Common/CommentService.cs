@@ -11,11 +11,13 @@ namespace BlogPlatform.Features.Comments.Common
     {
         private readonly AppDbContext _context;
         private readonly IHubContext<NotificationHub> _hubContext;
+        private readonly ILogger<CommentService> _logger;
 
-        public CommentService(AppDbContext context, IHubContext<NotificationHub> hubContext)
+        public CommentService(AppDbContext context, IHubContext<NotificationHub> hubContext, ILogger<CommentService> logger)
         {
             _context = context;
             _hubContext = hubContext;
+            _logger = logger;
         }
 
         public async Task AddCommentAsync(AddCommentRequest request, CancellationToken cancellationToken)
@@ -45,6 +47,7 @@ namespace BlogPlatform.Features.Comments.Common
                 post.Comments.Add(comment);
                 await _context.Comments.AddAsync(comment, cancellationToken);
                 await _context.SaveChangesAsync(cancellationToken);
+                _logger.LogInformation($"Notification sent: {notification.Message}");
             }
         }
 

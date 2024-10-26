@@ -11,11 +11,13 @@ namespace BlogPlatform.Features.Rates.Common
     {
         private readonly AppDbContext _context;
         private readonly IHubContext<NotificationHub> _hubContext;
+        private readonly ILogger<RateService> _logger;
 
-        public RateService(AppDbContext context, IHubContext<NotificationHub> hubContext)
+        public RateService(AppDbContext context, IHubContext<NotificationHub> hubContext, ILogger<RateService> logger)
         {
             _context = context;
             _hubContext = hubContext;
+            _logger = logger;
         }
 
         public async Task AddRateAsync(AddRateRequest request, CancellationToken cancellationToken)
@@ -44,6 +46,7 @@ namespace BlogPlatform.Features.Rates.Common
                 post.Rates.Add(rate);
                 await _context.Rates.AddAsync(rate, cancellationToken);
                 await _context.SaveChangesAsync(cancellationToken);
+                _logger.LogInformation($"Notification sent: {notification.Message}");
             }
         }
 
