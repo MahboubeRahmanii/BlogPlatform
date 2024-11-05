@@ -21,6 +21,8 @@ namespace BlogPlatform.Features.Posts.Common
                 Content = request.Content,
                 UserId = request.UserId,
                 CreatedAt = DateTime.UtcNow,
+                ScheduledPublishDate = request.ScheduledPublishDate,
+                IsPublished = request.ScheduledPublishDate == null || request.ScheduledPublishDate <= DateTime.UtcNow
             };
 
             _context.Posts.Add(post);

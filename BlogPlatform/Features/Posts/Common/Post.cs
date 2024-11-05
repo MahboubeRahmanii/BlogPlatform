@@ -10,6 +10,7 @@ namespace BlogPlatform.Features.Posts.Common
         public string Content { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime? ScheduledPublishDate { get; set; }
         public bool IsPublished { get; set; } = false;
 
         public int UserId { get; set; }

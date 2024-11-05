@@ -11,6 +11,7 @@ namespace BlogPlatform.Features.Posts
         public void AddServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<PostService>();
+            serviceCollection.AddHostedService<PostSchedulerService>();
             serviceCollection.AddValidatorsFromAssemblyContaining<AddPostRequest>();
             serviceCollection.AddValidatorsFromAssemblyContaining<EditPostRequest>();
             serviceCollection.AddScoped<IValidator<AddPostRequest>, AddPostRequestValidator>();
